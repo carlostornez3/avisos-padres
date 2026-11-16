@@ -4,6 +4,25 @@ Programa de escritorio (Python + Tkinter) para que un docente envíe avisos de i
 (tarea, conducta, reprobación, reconocimiento…) a las familias desde su propio Gmail,
 con vista previa editable, historial de envíos y, opcionalmente, redacción asistida por IA.
 
+## Por qué lo hice
+
+Como tutor de grupo, avisar a cada familia de una incidencia me tomaba de 5 a 8 horas a la semana:
+había que redactar y enviar un correo distinto a cada padre de familia, uno por uno, con riesgo de
+equivocarme de destinatario o de mensaje. Con este programa la misma tarea me toma unos 10 minutos:
+elijo al alumno y el tipo de situación, reviso la vista previa y envío.
+
+<!--
+## Capturas
+
+Agrega aquí 2 o 3 capturas de la ventana, hechas SOLO con datos de ejemplo (nunca alumnos ni correos reales).
+Guarda las imágenes en una carpeta `capturas/` y quita las marcas de comentario de estas líneas:
+
+![Ventana principal](capturas/ventana-principal.png)
+![Vista previa del aviso](capturas/vista-previa.png)
+-->
+
+## Qué hace
+
 - Sin dependencias externas: solo la biblioteca estándar de Python (incluye Tkinter).
 - Envío por SMTP de Gmail con **contraseña de aplicación** (requiere verificación en dos pasos).
 - Alumnos y materias en tablas separadas (`alumnos.csv`, `materias.csv`).
@@ -35,6 +54,16 @@ Python 3.9 o superior (en Windows, instálalo desde python.org marcando «Add Py
    ```
 
 La guía de uso completa (incluye cómo crear la contraseña de aplicación, elegir proveedor de IA y variables de entorno) está en [`LEEME.txt`](LEEME.txt).
+
+## Archivos del repositorio
+
+| Archivo | Para qué sirve |
+|---|---|
+| `avisos_padres.py` | El programa completo (ventana, envío por Gmail y redacción con IA) |
+| `plantillas.json` | Plantillas de avisos editables (tarea no entregada, conducta, reconocimiento, etc.) |
+| `materias.csv` | Lista de materias |
+| `alumnos.example.csv`, `config.example.json`, `secrets.example.txt` | Ejemplos para crear tus propios archivos de trabajo |
+| `LEEME.txt` | Guía de uso completa |
 
 ## Datos personales: qué NO se sube
 
