@@ -1,0 +1,7 @@
+{
+  "correo": "tucorreo@tuescuela.edu.mx",
+  "profesor": "Prof. Nombre Apellido",
+  "firma": "Prof. Nombre Apellido\nNombre de tu escuela",
+  "servidor_smtp": "smtp.gmail.com",
+  "puerto_smtp": 465
+}

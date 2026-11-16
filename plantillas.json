@@ -1,0 +1,100 @@
+{
+  "Tarea no entregada": {
+    "asunto": "{materia}: tarea pendiente de {alumno}",
+    "cuerpo": [
+      "Estimada familia de {alumno}:",
+      "",
+      "Les escribo para informarles que {alumno} ({grupo}) no entregó la tarea de {materia} correspondiente al {fecha}.",
+      "",
+      "{detalle}",
+      "",
+      "Les pido su apoyo para que {alumno} se ponga al corriente. Quedo atento a cualquier duda.",
+      "",
+      "Atentamente,"
+    ]
+  },
+  "Trabajo o actividad no realizada": {
+    "asunto": "{materia}: actividad sin realizar de {alumno}",
+    "cuerpo": [
+      "Estimada familia de {alumno}:",
+      "",
+      "Les informo que el {fecha}, durante la clase de {materia}, {alumno} ({grupo}) no realizó la actividad que se trabajó en el salón.",
+      "",
+      "{detalle}",
+      "",
+      "Les agradeceré platicar con {alumno} sobre la importancia de trabajar en clase. Quedo a sus órdenes para cualquier comentario.",
+      "",
+      "Atentamente,"
+    ]
+  },
+  "Reprobación o bajo rendimiento": {
+    "asunto": "{materia}: situación académica de {alumno}",
+    "cuerpo": [
+      "Estimada familia de {alumno}:",
+      "",
+      "Les escribo para comentarles que {alumno} ({grupo}) se encuentra en riesgo de no acreditar {materia}, o bien obtuvo una calificación reprobatoria en la evaluación del {fecha}.",
+      "",
+      "{detalle}",
+      "",
+      "Me gustaría trabajar junto con ustedes para que {alumno} mejore su desempeño. Si les parece bien, podemos coordinar una breve reunión o llamada.",
+      "",
+      "Atentamente,"
+    ]
+  },
+  "Comer en el salón": {
+    "asunto": "{materia}: alimentos en el salón ({alumno})",
+    "cuerpo": [
+      "Estimada familia de {alumno}:",
+      "",
+      "Les informo que el {fecha}, durante la clase de {materia}, {alumno} ({grupo}) estuvo comiendo en el salón, lo cual no está permitido por el reglamento escolar.",
+      "",
+      "{detalle}",
+      "",
+      "Les agradeceré reforzar con {alumno} que los alimentos se consumen en los horarios y espacios destinados para ello.",
+      "",
+      "Atentamente,"
+    ]
+  },
+  "Indisciplina o conducta": {
+    "asunto": "{materia}: conducta de {alumno}",
+    "cuerpo": [
+      "Estimada familia de {alumno}:",
+      "",
+      "Les escribo para informarles que el {fecha}, durante la clase de {materia}, {alumno} ({grupo}) mostró una conducta que no corresponde a lo esperado en el salón.",
+      "",
+      "{detalle}",
+      "",
+      "Les agradeceré su apoyo para platicar con {alumno} al respecto. Estoy disponible para atender cualquier duda o comentario.",
+      "",
+      "Atentamente,"
+    ]
+  },
+  "Falta de material": {
+    "asunto": "{materia}: material pendiente de {alumno}",
+    "cuerpo": [
+      "Estimada familia de {alumno}:",
+      "",
+      "Les informo que el {fecha} {alumno} ({grupo}) llegó a la clase de {materia} sin el material necesario para trabajar.",
+      "",
+      "{detalle}",
+      "",
+      "Les agradeceré su apoyo para que {alumno} lo traiga en las próximas sesiones.",
+      "",
+      "Atentamente,"
+    ]
+  },
+  "Reconocimiento positivo": {
+    "asunto": "{materia}: buen desempeño de {alumno}",
+    "cuerpo": [
+      "Estimada familia de {alumno}:",
+      "",
+      "Me da gusto compartirles que {alumno} ({grupo}) tuvo un muy buen desempeño en {materia} el {fecha}.",
+      "",
+      "{detalle}",
+      "",
+      "Los felicito y los invito a reconocer con {alumno} este esfuerzo.",
+      "",
+      "Atentamente,"
+    ]
+  }
+}

@@ -1,0 +1,162 @@
+AVISOS A PADRES DE FAMILIA
+==========================
+
+SI LO DESCARGASTE DE GITHUB
+Los archivos con datos personales no se suben al repositorio. Antes de empezar, crea los
+tuyos copiando los de ejemplo (en PowerShell, dentro de la carpeta):
+    copy alumnos.example.csv alumnos.csv
+    copy config.example.json config.json
+    copy secrets.example.txt secrets.txt
+
+PRIMERA VEZ
+1. Abre config.json y cambia:
+   - "correo": tu correo de la escuela
+   - "profesor" y "firma": tu nombre y los datos de la escuela
+2. Abre alumnos.csv (con Excel o el Bloc de notas) y reemplaza los alumnos de ejemplo
+   por los tuyos. Una fila por alumno. Columnas: alumno, grupo, correo_padre.
+   Si hay dos correos (mamá y papá), sepáralos con punto y coma.
+   Guárdalo como CSV UTF-8.
+   (Si tu archivo todavía trae una columna "materia", el programa la ignora
+   y une las filas repetidas de un mismo alumno.)
+3. Abre materias.csv y deja tus materias, una por fila, debajo del encabezado "materia".
+   La materia se elige en la ventana al redactar cada aviso.
+4. Ejecuta el programa: doble clic en avisos_padres.py,
+   o en la terminal:  python avisos_padres.py
+
+USO DIARIO
+- Elige alumnos (Ctrl o Shift para varios), el tipo de aviso, la materia, la fecha y,
+  si quieres, un detalle. Revisa la vista previa y pulsa "Enviar aviso(s)".
+- Con un solo alumno puedes editar asunto y texto antes de enviar.
+- Con varios alumnos, cada familia recibe su propio correo con su nombre.
+- La primera vez de cada sesión te pide la contraseña de aplicación (a menos que la
+  tengas en secrets.txt; ver abajo). Lo que escribes en ese cuadro no se guarda.
+
+EDITAR LOS TEXTOS
+- plantillas.json: cada tipo tiene "asunto" y "cuerpo" (una línea por renglón).
+  Campos disponibles: {alumno} {grupo} {materia} {fecha} {profesor} {detalle}
+  Deja {detalle} solo en su renglón: si no escribes detalle, el renglón desaparece.
+  Puedes agregar tipos nuevos copiando uno existente.
+
+HISTORIAL
+- registro_avisos.csv se crea solo con cada envío (fecha, alumno, tipo, correo, estado).
+  Ciérralo en Excel antes de enviar, o no se podrá escribir.
+- Los correos enviados también quedan en tu carpeta "Enviados" de Gmail.
+
+REDACTAR UNA SITUACIÓN NUEVA CON IA
+- En "Tipo" elige "Otra situación (redactar con IA)". Selecciona al alumno (o varios),
+  escribe en el cuadro lo que pasó (basta una o dos frases), elige el tono y pulsa
+  "Redactar con IA". En unos segundos aparece el borrador en la vista previa.
+- Revisa y corrige el borrador a tu gusto. Luego puedes:
+    * "Enviar aviso(s)": se manda igual que cualquier otro aviso.
+    * "Guardar como plantilla…": le pones nombre y queda en la lista "Tipo" para
+      usarla otra vez (y en plantillas.json). Si editaste el texto a mano, se guarda
+      tu versión. Antes de guardar, el programa deja copia en plantillas.json.bak.
+- El historial (registro_avisos.csv) anota estos avisos como "Redactado con IA" y
+  guarda lo que escribiste en la columna "detalle".
+
+PARA QUE FUNCIONE LA IA CON ANTHROPIC (predeterminado, de pago)
+1. Entra a la Consola de Anthropic (platform.claude.com), agrega créditos en
+   Settings > Billing y crea una clave de API (empieza con sk-ant-).
+   La API se cobra aparte de la suscripción de claude.ai (Pro, etc.). Los planes
+   Max y Team incluyen créditos mensuales de API.
+2. Pega la clave en secrets.txt como   ANTHROPIC_API_KEY=sk-ant-...   (ver más abajo).
+   Si no la pones ahí, el programa te la pide la primera vez que pulses "Redactar con IA"
+   en cada sesión y no la guarda.
+   Anthropic es el proveedor predeterminado: en config.json, o no pongas la línea
+   "proveedor", o pon   "proveedor": "anthropic"   (si antes usabas Gemini, cámbiala).
+   Si en la Consola hay una opción de límite de gasto mensual, actívala para tener un tope.
+3. Costo aproximado: un borrador cuesta una fracción mínima de centavo de dólar
+   (con el modelo predeterminado, del orden de miles de borradores por dólar).
+   Se puede cambiar el modelo agregando "modelo_ia": "..." en config.json (por ejemplo
+   "claude-sonnet-5-5" redacta con más matiz pero cuesta más que el predeterminado
+   "claude-haiku-5-5").
+
+PRIVACIDAD
+- El nombre del alumno NO se envía a la IA: antes de enviar, el programa lo cambia por
+  el marcador {alumno} (y también el grupo, la materia y la fecha) y lo vuelve a poner
+  aquí cuando llega el borrador. No se envían correos, calificaciones ni listas.
+- Sí se envía el texto que escribes. No incluyas nombres de otros alumnos y revisa
+  la política de tu escuela sobre el uso de herramientas de IA.
+- Con varios alumnos seleccionados, describe la situación en general, sin nombres.
+
+ELEGIR OTRA IA (incluye opciones gratuitas)
+En config.json agrega las líneas que correspondan (sin olvidar las comas entre líneas).
+Las condiciones gratuitas cambian: revísalas en el sitio de cada servicio.
+
+  Google Gemini (tiene nivel gratuito; clave en aistudio.google.com/apikey):
+      "proveedor": "gemini"
+    Opcional: "modelo_ia": "gemini-3.5-flash-lite" (u otro de la lista de Google).
+    OJO: en el nivel gratuito Google indica que el contenido se usa para mejorar sus
+    productos. El nombre del alumno no se envía, pero sí lo que escribes.
+
+  OpenRouter (modelos gratuitos que terminan en ":free", con límites diarios bajos):
+      "proveedor": "openai",
+      "url_ia": "https://openrouter.ai/api/v1/chat/completions",
+      "modelo_ia": "<id de un modelo :free, de openrouter.ai/models>"
+
+  Ollama en tu propia computadora (gratis y 100% privado; nada sale de tu equipo,
+  pero necesitas instalarlo, descargar un modelo y una computadora con buena memoria):
+      "proveedor": "openai",
+      "url_ia": "http://localhost:11434/v1/chat/completions",
+      "modelo_ia": "<nombre del modelo que descargaste>"
+    En este caso no se pide clave ni confirmación de envío por internet.
+
+  DeepSeek (de pago, muy barato; sus servidores y su política de privacidad
+  están en China):
+      "proveedor": "openai",
+      "url_ia": "https://api.deepseek.com/chat/completions",
+      "modelo_ia": "deepseek-flash"
+
+  OpenAI / ChatGPT (la API es de pago y aparte de la suscripción a ChatGPT):
+      "proveedor": "openai",
+      "url_ia": "https://api.openai.com/v1/chat/completions",
+      "modelo_ia": "<modelo que quieras usar>"
+
+La clave de cualquier servicio se pide una vez por sesión y no se guarda. También
+puedes definir la variable de entorno GEMINI_API_KEY, ANTHROPIC_API_KEY o
+AVISOS_IA_CLAVE (para los servicios tipo "openai") y ya no te la pide.
+
+GUARDAR TUS CLAVES EN secrets.txt (opcional)
+- Abre secrets.txt (viene en la carpeta) y escribe cada clave después del signo =, sin
+  comillas. Por ejemplo:   AVISOS_CLAVE=abcdabcdabcdabcd
+                           ANTHROPIC_API_KEY=sk-ant-...
+                           GEMINI_API_KEY=AIza...
+  AVISOS_CLAVE es la contraseña de aplicación de Gmail (con o sin espacios).
+  Solo se usa la clave del proveedor elegido en config.json; las demás pueden quedar
+  vacías. Aceptan también nombres parecidos (GMAIL_PASSWORD, CLAUDE_API_KEY...) y no
+  importan las mayúsculas.
+- El archivo tiene que estar en la MISMA carpeta que avisos_padres.py. Si aun así el
+  programa te pide una clave, el cuadro te dice en qué carpeta buscó y qué nombres vio
+  en el archivo.
+  Cierra y vuelve a abrir el programa para que lea los cambios.
+- Cuida que el archivo se llame exactamente secrets.txt y no secrets.txt.txt (Windows
+  oculta las extensiones por defecto; actívalas en el Explorador: Ver > Mostrar >
+  Extensiones de nombre de archivo).
+- Es texto sin cifrar: cualquiera que abra la carpeta puede leerlo. No lo compartas,
+  no lo subas a una carpeta compartida y, si envías el programa a alguien, bórralo
+  antes. Si sospechas que alguien lo vio, revoca la clave: la contraseña de aplicación
+  en myaccount.google.com/apppasswords y la clave de Gemini en aistudio.google.com/apikey,
+  y crea otra.
+- Si prefieres no dejar las claves en un archivo, no llenes secrets.txt: el programa
+  te las pide al usarlas.
+
+VARIABLES DE ENTORNO DE WINDOWS (alternativa a secrets.txt)
+- Menú Inicio > escribe "variables de entorno" > "Editar las variables de entorno de
+  esta cuenta" > en "Variables de usuario" pulsa "Nueva...", escribe el nombre
+  (por ejemplo GEMINI_API_KEY) y el valor, y acepta. Cierra y vuelve a abrir el programa.
+- Si existe la variable de entorno, el programa la usa antes que secrets.txt.
+
+EDITAR ASUNTO O TEXTO ANTES DE ENVIAR
+- Con UN alumno seleccionado puedes editar el asunto y el texto. Tus cambios se conservan
+  aunque cambies la fecha o la materia (el programa los ajusta). Se reinician al cambiar
+  de alumno o de tipo, y al redactar un borrador nuevo con IA. Si cambias el campo
+  "detalle" después de editar a mano, ese detalle ya no se aplica al texto editado.
+- Con varios alumnos seleccionados el asunto y el texto no se editan (cada familia recibe
+  el de la plantilla con su nombre).
+
+SI LA IA DICE "ESTÁ SATURADO O NO DISPONIBLE"
+- Es un problema temporal del servidor del proveedor (en Gemini gratuito pasa a ratos), no de tu
+  clave. El programa ya reintenta solo y, con Gemini, prueba un segundo modelo
+  (gemini-3.5-flash-lite) antes de mostrar el aviso. Si aun así sale, espera unos minutos.
+- Para elegir tú el modelo de respaldo (cualquier proveedor), agrega en config.json:
+      "modelo_respaldo": "nombre-del-modelo"

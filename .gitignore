@@ -1,0 +1,17 @@
+# Datos personales y claves: NUNCA se suben. Se crean copiando los archivos .example.
+/alumnos.csv
+/config.json
+/secrets.txt
+/registro_avisos.csv
+.env
+
+# Copias de seguridad que crea el programa
+*.bak
+
+# Python y editores
+__pycache__/
+*.pyc
+.venv/
+venv/
+.vscode/
+.idea/
